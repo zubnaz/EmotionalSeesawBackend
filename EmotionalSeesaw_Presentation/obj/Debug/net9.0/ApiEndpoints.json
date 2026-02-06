@@ -1,0 +1,97 @@
+[
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.AuthController",
+    "Method": "AuthorizationCheck",
+    "RelativePath": "api/auth/authorization-check",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.AuthController",
+    "Method": "GoogleAuthorization",
+    "RelativePath": "api/auth/google",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EmotionalSeesaw_Domain.Requests.Auth.GoogleAuthorizationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.SummariesController",
+    "Method": "CreateSummaryOfDay",
+    "RelativePath": "api/summaries",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EmotionalSeesaw_Domain.Requests.Summary.CreateSummaryRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.SummariesController",
+    "Method": "GetSummaries",
+    "RelativePath": "api/summaries",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.SummariesController",
+    "Method": "GetSummaryById",
+    "RelativePath": "api/summaries/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmotionalSeesaw_Presentation.Controllers.SummariesController",
+    "Method": "SummaryAnalysis",
+    "RelativePath": "api/summaries/{id}/emotional-states",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

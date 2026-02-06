@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionalSeesaw_Presentation", "EmotionalSeesaw_Presentation\EmotionalSeesaw_Presentation.csproj", "{4DAFCB36-82E3-408E-A926-03F5BC675140}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionalSeesaw_Application", "EmotionalSeesaw_Application\EmotionalSeesaw_Application.csproj", "{D272F6D9-712D-4783-87BE-1B0B75B90D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionalSeesaw_Infrastructure", "EmotionalSeesaw_Infrastructure\EmotionalSeesaw_Infrastructure.csproj", "{80ED2457-F250-4F73-BA0B-F7BCA244B566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionalSeesaw_Domain", "EmotionalSeesaw_Domain\EmotionalSeesaw_Domain.csproj", "{8CB136B6-F275-4D3F-BF1A-F36ACEFB9CAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DAFCB36-82E3-408E-A926-03F5BC675140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DAFCB36-82E3-408E-A926-03F5BC675140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DAFCB36-82E3-408E-A926-03F5BC675140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DAFCB36-82E3-408E-A926-03F5BC675140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D272F6D9-712D-4783-87BE-1B0B75B90D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D272F6D9-712D-4783-87BE-1B0B75B90D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D272F6D9-712D-4783-87BE-1B0B75B90D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D272F6D9-712D-4783-87BE-1B0B75B90D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80ED2457-F250-4F73-BA0B-F7BCA244B566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80ED2457-F250-4F73-BA0B-F7BCA244B566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80ED2457-F250-4F73-BA0B-F7BCA244B566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80ED2457-F250-4F73-BA0B-F7BCA244B566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB136B6-F275-4D3F-BF1A-F36ACEFB9CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB136B6-F275-4D3F-BF1A-F36ACEFB9CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB136B6-F275-4D3F-BF1A-F36ACEFB9CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB136B6-F275-4D3F-BF1A-F36ACEFB9CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C7FE936-9199-4FA7-A691-6C9F956CFB61}
+	EndGlobalSection
+EndGlobal

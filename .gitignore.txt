@@ -1,0 +1,36 @@
+# Візуальна студія
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Папки збірки
+bin/
+obj/
+Debug/
+Release/
+
+# Тимчасові файли
+*.log
+*.tlog
+*.vsidx
+*.cache
+*.pdb
+*.tmp
+
+# Конфігурації
+*.dbmdl
+*.bak
+*.backup
+*.ldf
+*.mdf
+
+# Пакети NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# IDE специфічне
+*.vscode/
+*.idea/
