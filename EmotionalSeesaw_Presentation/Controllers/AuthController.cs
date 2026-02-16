@@ -26,12 +26,12 @@ public class AuthController(IDispatcher dispatcher) : ControllerBase
         return Ok(result);
     }
 
-    [Authorize]
+    /*[Authorize]
     [HttpGet("authorization-check")]
     public IActionResult AuthorizationCheck()
     {
         var userID = User.Claims.First((c => c.Type == "Id")).Value;
         Console.WriteLine($"User ID: {userID}");
         return Ok("User is authorized");
-    }
+    }*/
 }

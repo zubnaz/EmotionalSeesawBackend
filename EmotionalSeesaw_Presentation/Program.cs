@@ -7,12 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
 
 builder.Services.AddPresentation(builder.Configuration)
                 .AddInfrastructure(builder.Configuration)
                 .AddApplication(builder.Configuration);
+
+
 
 var app = builder.Build();
 

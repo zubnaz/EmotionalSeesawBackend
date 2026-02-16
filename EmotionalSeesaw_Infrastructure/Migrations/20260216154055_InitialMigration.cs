@@ -52,6 +52,19 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmotionalStates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmotionalStates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -157,6 +170,51 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SummaryOfDayEntity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false),
+                    Advice = table.Column<string>(type: "text", nullable: true),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SummaryOfDayEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SummaryOfDayEntity_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmotionalStateSummaryOfDay",
+                columns: table => new
+                {
+                    EmotionalStateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SummaryOfDayId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmotionalStateSummaryOfDay", x => new { x.EmotionalStateId, x.SummaryOfDayId });
+                    table.ForeignKey(
+                        name: "FK_EmotionalStateSummaryOfDay_EmotionalStates_EmotionalStateId",
+                        column: x => x.EmotionalStateId,
+                        principalTable: "EmotionalStates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmotionalStateSummaryOfDay_SummaryOfDayEntity_SummaryOfDayId",
+                        column: x => x.SummaryOfDayId,
+                        principalTable: "SummaryOfDayEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -193,6 +251,16 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmotionalStateSummaryOfDay_SummaryOfDayId",
+                table: "EmotionalStateSummaryOfDay",
+                column: "SummaryOfDayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SummaryOfDayEntity_UserId",
+                table: "SummaryOfDayEntity",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -214,7 +282,16 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EmotionalStateSummaryOfDay");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "EmotionalStates");
+
+            migrationBuilder.DropTable(
+                name: "SummaryOfDayEntity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmotionalSeesaw_Infrastructure.Migrations
 {
     [DbContext(typeof(EmotionalSeesawDbContext))]
-    [Migration("20251025142304_RemoveDaysTableFromDB")]
-    partial class RemoveDaysTableFromDB
+    [Migration("20260216154055_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,16 +24,6 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.CalendarEntity", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Calendars");
-                });
 
             modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.EmotionalStateEntity", b =>
                 {
@@ -63,24 +53,19 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                     b.Property<string>("Advice")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CalendarId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
-
-                    b.Property<Guid?>("EmotionalStateId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CalendarId");
-
-                    b.HasIndex("EmotionalStateId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SummaryOfDayEntity");
                 });
@@ -148,6 +133,21 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("EmotionalStateSummaryOfDay", b =>
+                {
+                    b.Property<Guid>("EmotionalStateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SummaryOfDayId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("EmotionalStateId", "SummaryOfDayId");
+
+                    b.HasIndex("SummaryOfDayId");
+
+                    b.ToTable("EmotionalStateSummaryOfDay");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -280,33 +280,30 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.CalendarEntity", b =>
+            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.SummaryOfDayEntity", b =>
                 {
                     b.HasOne("EmotionalSeesaw_Domain.Entities.User", "User")
-                        .WithOne("CalendarEntity")
-                        .HasForeignKey("EmotionalSeesaw_Domain.Entities.CalendarEntity", "UserId")
+                        .WithMany("SummariesOfDays")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.SummaryOfDayEntity", b =>
+            modelBuilder.Entity("EmotionalStateSummaryOfDay", b =>
                 {
-                    b.HasOne("EmotionalSeesaw_Domain.Entities.CalendarEntity", "Calendar")
-                        .WithMany("SummaryOfDays")
-                        .HasForeignKey("CalendarId")
+                    b.HasOne("EmotionalSeesaw_Domain.Entities.EmotionalStateEntity", null)
+                        .WithMany()
+                        .HasForeignKey("EmotionalStateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EmotionalSeesaw_Domain.Entities.EmotionalStateEntity", "EmotionalState")
-                        .WithMany("SummariesOfDays")
-                        .HasForeignKey("EmotionalStateId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Calendar");
-
-                    b.Navigation("EmotionalState");
+                    b.HasOne("EmotionalSeesaw_Domain.Entities.SummaryOfDayEntity", null)
+                        .WithMany()
+                        .HasForeignKey("SummaryOfDayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -360,20 +357,9 @@ namespace EmotionalSeesaw_Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.CalendarEntity", b =>
-                {
-                    b.Navigation("SummaryOfDays");
-                });
-
-            modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.EmotionalStateEntity", b =>
-                {
-                    b.Navigation("SummariesOfDays");
-                });
-
             modelBuilder.Entity("EmotionalSeesaw_Domain.Entities.User", b =>
                 {
-                    b.Navigation("CalendarEntity")
-                        .IsRequired();
+                    b.Navigation("SummariesOfDays");
                 });
 #pragma warning restore 612, 618
         }

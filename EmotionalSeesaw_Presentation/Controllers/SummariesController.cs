@@ -22,27 +22,27 @@ namespace EmotionalSeesaw_Presentation.Controllers
             var summary = await dispatcher.Send<SummaryOfDayEntity>(new GetSummaryByIdQuery(id));
             return Ok(mapper.Map<SummaryOfDayResponse>(summary));
         }
-        [Authorize]
+        //[Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateSummaryOfDay([FromBody] CreateSummaryRequest request)
+        public async Task<IActionResult> CreateSummaryOfDay([FromBody] CreateSummaryRequest request, string userID)
         {
-            var userID = User.Claims.First((c => c.Type == "Id")).Value;
+            //var userID = User.Claims.First((c => c.Type == "Id")).Value;
             var summaryId = await dispatcher.Send<Guid>(new CreateSummaryOfDayCommand(request.Text, request.Day, request.Month, request.Year, Guid.Parse(userID)));
             return Ok(summaryId);
         }
-        [Authorize]
+        //[Authorize]
         [HttpPatch("{id}/emotional-states")]
-        public async Task<IActionResult> SummaryAnalysis([FromRoute] Guid id)
+        public async Task<IActionResult> SummaryAnalysis([FromRoute] Guid id, [FromQuery]Guid userID)
         {
-            var userID = User.Claims.First((c => c.Type == "Id")).Value;
-            await dispatcher.Send(new SummaryAnalysisCommand(id, Guid.Parse(userID)));
+            //var userID = User.Claims.First((c => c.Type == "Id")).Value;
+            await dispatcher.Send(new SummaryAnalysisCommand(id, userID));
             return NoContent();
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetSummaries([FromQuery] int year, int month)
+        public async Task<IActionResult> GetSummaries([FromQuery] int year, int month, string userID)
         {
-            var userID = User.Claims.First((c => c.Type == "Id")).Value;
+            //var userID = User.Claims.First((c => c.Type == "Id")).Value;
             var summaries = await dispatcher.Send<ICollection<SummaryOfDayEntity>>(new GetSummariesOfMonthQuery(Guid.Parse(userID), month, year));
             return Ok(mapper.Map<ICollection<SummaryOfDayCollectionItemResponse>>(summaries));
         }
